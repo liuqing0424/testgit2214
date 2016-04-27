@@ -1,0 +1,122 @@
+<!DOCTYPE HTML><html>
+    <head>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <META content="text/html; charset=UTF-8" http-equiv="Content-Type">
+        <meta charset="UTF-8">
+        <title>index</title>
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" name="viewport">
+        <link href="css/worklight.css" rel="stylesheet">
+        <link href="jqueryMobile/jquery.mobile.external-png-1.4.2.css" rel="stylesheet">
+        <link href="jqueryMobile/jquery.mobile.theme-1.4.2.css" rel="stylesheet">
+        <link href="jqueryMobile/jquery.mobile.inline-png-1.4.2.css" rel="stylesheet">
+        <link href="jqueryMobile/jquery.mobile-1.4.2.css" rel="stylesheet">
+        <link href="jqueryMobile/jquery.mobile.structure-1.4.2.css" rel="stylesheet">
+        <link href="jqueryMobile/jquery.mobile.inline-svg-1.4.2.css" rel="stylesheet">
+        <link href="jqueryMobile/jquery.mobile.icons-1.4.2.css" rel="stylesheet">
+        <link href="js/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="css/scrollbar.css" rel="stylesheet" type="text/css">
+        <link href="css/A0001.css" rel="stylesheet">
+<!--        <link href="css/A0002.css" rel="stylesheet">-->
+        <link href="css/A0003.css" rel="stylesheet">
+        <link href="css/A0004.css" rel="stylesheet">
+        <link href="css/A0005.css" rel="stylesheet">
+<!--        <link href="css/A0006.css" rel="stylesheet">-->
+        <link href="css/A0007.css" rel="stylesheet">
+        <link href="css/A0008.css" rel="stylesheet">
+        <link href="css/A0009.css" rel="stylesheet">
+        <link href="css/A0010.css" rel="stylesheet">
+        <link href="css/A0011.css" rel="stylesheet">
+        <link href="css/A0012.css" rel="stylesheet">
+        <link href="css/A0013.css" rel="stylesheet">
+        <link href="css/A0014.css" rel="stylesheet">
+<!--        <link href="css/A0015.css" rel="stylesheet">-->
+        <link href="css/A0016.css" rel="stylesheet">
+        <link href="css/A0017.css" rel="stylesheet">
+        <link href="css/A0018.css" rel="stylesheet">
+        <link href="css/A0019.css" rel="stylesheet">
+        <link href="css/A0020.css" rel="stylesheet">
+        <link href="css/A0021.css" rel="stylesheet">
+        <link href="css/A0022.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+        <link href="css/default/default.css" rel="stylesheet" type="text/css">
+        <link href="dist/switchery.css" rel="stylesheet">
+        <!--<script src="http://197.3.176.217:1337/vorlon.js"></script>-->
+    </head>
+    <body class="content">
+            <div data-role="page" id="page" style="display: none">
+                <div data-role="content" style="padding: 15px;">
+            中国民生银行移动金融服务平台客户化运营项目自助应
+            </div>
+    <!--<button id="mlkui" type="button">设备登陆并跳转到Mock中指定的流程</button>-->
+            <button id="mlk" onclick="changePage('page/steps/kzjh/kzjh_inputInfo.html','none');" type="button">
+                单页面调试
+            </button>
+            <button id="dddd" onclick="changePage('page/steps/lcgm/product_list.html','none');" type="button">
+                单页面调试2
+            </button>
+            <button id="mlkui" type="button">个人活期取款</button>
+            <button id="xgxx" type="button">修改联系信息</button>
+            <button id="zhcx" type="button">账户查询</button>
+            <button id="xjhk" type="button">现金汇款</button>
+            <button id="lcgm" type="button">理财购买</button>
+            <button id="hqck" type="button">个人活期存款</button>
+            <button id="mmcz" type="button">密码重置</button>
+        </div>
+        <script src="cordova.js"></script>
+        <script src="dist/switchery.js"></script>
+        <script src="js/bootstrap/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <script src="jqueryMobile/jquery.mobile-1.4.2.js" type="text/javascript"></script>
+        <script src="js/iscroll/iscroll.js" type="text/javascript"></script>
+        <script src="js/seajs/sea.js" type="text/javascript"></script>
+        <script src="page/base/453.js" type="text/javascript"></script>
+        <script src="index.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var date = new Date();
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = date.getFullYear() + month  + strDate + date.getHours()  + date.getMinutes() + date.getSeconds();
+            seajs.config({
+                map: [
+                    [ /^(.*\/www\/default\/page\/.*\.(?:css|js))(?:.*)$/i, '$1?v='+currentdate ]
+                ]
+
+            });
+        </script>
+
+        <script>
+
+        $("#mlkui").on('click', function ()
+        {
+            //设备登陆
+            $.ajax({
+                        type: "POST",
+                        cache: false,
+                        dataType: "text",
+                        async: false,
+                        url: URL.RootURL + "/" + "cbank/DeviceLogin.do",
+                        data: {udid: "gghjjgtgghhj"},
+                        xhrFields: {withCredentials: true},
+                        success: function (data, textStatus, jqXHR)
+                        {
+                            var a = jqXHR.getAllResponseHeaders();
+                            var a = $.mobile.path.makeUrlAbsolute('page/steps/core/set_user.html');
+                            $.mobile.changePage(a, null, false, false);
+                        },
+                        error: function ()
+                        {
+                            alert("设备登陆失败");
+                        }
+                    }
+            );
+        });
+
+        </script>
+    </body>
+</html>
